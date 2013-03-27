@@ -89,7 +89,51 @@ class Tile(object):
         str_ = str_ + ','.join(map(lambda x : str(x), self.walls))
         str_ = str_ + ')'
         return str_
+
+
+    def ascii_art(self):
+        """
+        return a list of 5 strings each of which 9 characters long. 
+
+        these 5 strings form a 5 by 9 ascii art representation of this Tile 
+        which is approximately square.
+        """
+        ascii_art = []
+        if self.has_wall(Tile.NORTH) :
+            ascii_art.append('+-------+')
+        else:
+            ascii_art.append('+       +')
         
+        if self.has_wall(Tile.WEST) :
+            ascii_art.append('|    ')
+            ascii_art.append('|    ')
+            ascii_art.append('|    ')
+        else:
+            ascii_art.append('     ')
+            ascii_art.append('     ')
+            ascii_art.append('     ')
+
+        if self.has_wall(Tile.EAST) :
+            ascii_art[1] = ascii_art[1] + '   |'
+            ascii_art[2] = ascii_art[2] + '   |'
+            ascii_art[3] = ascii_art[3] + '   |'
+        else:
+            ascii_art[1] = ascii_art[1] + '     '
+            ascii_art[2] = ascii_art[2] + '     '
+            ascii_art[3] = ascii_art[3] + '     '
+
+        if self.has_wall(Tile.SOUTH) :
+            ascii_art.append('+-------+')
+        else:
+            ascii_art.append('+       +')
+
+        return ascii_art
+
+    def print_ascii_art(self):
+        for line in self.ascii_art():
+            print(line)
+
+
 
 class Straight(Tile):
     """Create a Straight tile.
