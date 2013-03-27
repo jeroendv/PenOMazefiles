@@ -14,9 +14,14 @@ class Tile(object):
     A tile represents a square object with either a wall or no wall on either side
     """
     
-    # a list with 4 bools indication the presence of a wall in the north, east,
-    # south and west direction of the tile respectively
+    """ Wall list of this Tile
+
+    A list with 4 booleans indication the presence of a wall in the north, 
+    east, south and west direction of the tile respectively
+    """
     walls = None
+
+
 
     """North direction Identifier"""
     NORTH = 0
@@ -27,7 +32,7 @@ class Tile(object):
     """West direction Identifier"""
     WEST  = 3
 
-    def __init__(self, walls = [0,0,0,0]):
+    def __init__(self, walls = [0,0,0,0], rotations=0):
         """ Create a new Tile object
 
         Input is a list with 4 booleans values indicating the presence of a 
@@ -39,6 +44,7 @@ class Tile(object):
 
         super(Tile, self).__init__()
         self.walls = [bool(x) for x in walls]
+        self.rotate(rotations)
 
     def has_wall(self, direction):
         """
@@ -68,6 +74,15 @@ class Tile(object):
 
         return not self.walls[direction];
 
+    def rotate(self, number=1):
+        """Rotate this Tile <number> time 90 degrees counter clockwise"""
+        for rotationNumber in range(0,number):
+            tmp= self.walls[3]
+            for i in range(3,0,-1):
+                self.walls[i] = self.walls[i-1]
+            self.walls[0] = tmp
+
+        return self
 
     def __str__(self):
         str_= 'Tile('
@@ -83,8 +98,8 @@ class Straight(Tile):
     is open  in the North and South direction
     """
 
-    def __init__(self):
-        super().__init__([False, True, False, True])
+    def __init__(self,rotations=0):
+        super().__init__([False, True, False, True]),rotations
 
 class Corner(Tile):
     """Create a Corner tile.
@@ -93,8 +108,8 @@ class Corner(Tile):
     is open  in the East and South direction
     """
 
-    def __init__(self):
-        super().__init__([True, False, False, True])
+    def __init__(self,rotations=0):
+        super().__init__([True, False, False, True],rotations)
 
 class T(Tile):
     """Create a T tile.
@@ -102,8 +117,8 @@ class T(Tile):
     A T Tile is  tile a wall in the North direction and is open elsewhere
     """
 
-    def __init__(self):
-        super().__init__([True, False, False, False])
+    def __init__(self,rotations=0):
+        super().__init__([True, False, False, False],rotations)
 
 class DeadEnd(Tile):
     """Create a DeadEnd tile.
@@ -112,8 +127,8 @@ class DeadEnd(Tile):
     other directions.
     """
 
-    def __init__(self):
-        super().__init__([True, True, False, True])
+    def __init__(self,rotations=0):
+        super().__init__([True, True, False, True],rotations)
 
 class Cross(Tile):
     """Create a Cross tile.
@@ -121,8 +136,8 @@ class Cross(Tile):
     A Cross Tile is  tile which is open in all directions.
     """
 
-    def __init__(self):
-        super().__init__([False, False, False, False])
+    def __init__(self,rotations=0):
+        super().__init__([False, False, False, False],rotations)
 
 class Closed(Tile):
     """Create a Closed tile.
@@ -130,8 +145,8 @@ class Closed(Tile):
     A Closed Tile is  has walls in all directions.
     """
 
-    def __init__(self):
-        super().__init__([True, True, True, True])
+    def __init__(self,rotations=0):
+        super().__init__([True, True, True, True],rotations)
 
 class Seesaw(Tile):
     """Create a Seasaw tile.
@@ -139,19 +154,19 @@ class Seesaw(Tile):
     A Seesaw Tile is  has walls in East and west and in open in the north and south direction.
     """
 
-    def __init__(self):
-        super().__init__([False, True, False,True])
+    def __init__(self,rotations=0):
+        super().__init__([False, True, False,True],rotations)
 
 
 def main():
     """docstring for main"""
-    print(Straight())
-    print(Corner())
-    print(T())
-    print(DeadEnd())
-    print(Cross())
-    print(Closed())
-    print(Seesaw())
+    print(Straight().rotate(2))
+    print(Corner().rotate(2))
+    print(T().rotate(2))
+    print(DeadEnd().rotate(2))
+    print(Cross().rotate(2))
+    print(Closed().rotate(2))
+    print(Seesaw().rotate(2))
 
 
 if __name__ == '__main__':
