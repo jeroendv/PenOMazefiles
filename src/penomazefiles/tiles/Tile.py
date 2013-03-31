@@ -75,7 +75,7 @@ class Tile(object):
         return not self.walls[direction];
 
     def rotate(self, number=1):
-        """Rotate this Tile <number> time 90 degrees counter clockwise"""
+        """Rotate this Tile <number> times 90 degrees counter clockwise"""
         for rotationNumber in range(0,number):
             tmp= self.walls[3]
             for i in range(3,0,-1):
@@ -118,9 +118,9 @@ class Tile(object):
             ascii_art[2] = ascii_art[2] + '   |'
             ascii_art[3] = ascii_art[3] + '   |'
         else:
-            ascii_art[1] = ascii_art[1] + '     '
-            ascii_art[2] = ascii_art[2] + '     '
-            ascii_art[3] = ascii_art[3] + '     '
+            ascii_art[1] = ascii_art[1] + '    '
+            ascii_art[2] = ascii_art[2] + '    '
+            ascii_art[3] = ascii_art[3] + '    '
 
         if self.has_wall(Tile.SOUTH) :
             ascii_art.append('+-------+')
@@ -143,7 +143,7 @@ class Straight(Tile):
     """
 
     def __init__(self,rotations=0):
-        super().__init__([False, True, False, True]),rotations
+        super().__init__([False, True, False, True], rotations)
 
 class Corner(Tile):
     """Create a Corner tile.
@@ -202,16 +202,6 @@ class Seesaw(Tile):
         super().__init__([False, True, False,True],rotations)
 
 
-def main():
-    """docstring for main"""
-    print(Straight().rotate(2))
-    print(Corner().rotate(2))
-    print(T().rotate(2))
-    print(DeadEnd().rotate(2))
-    print(Cross().rotate(2))
-    print(Closed().rotate(2))
-    print(Seesaw().rotate(2))
-
-
 if __name__ == '__main__':
-    main()
+    import unittest
+    unittest.main()
