@@ -36,6 +36,55 @@ class Test_Tile(unittest.TestCase):
         self.assertEqual(tile.is_open(Tile.SOUTH), False)
         self.assertEqual(tile.is_open(Tile.WEST), True)
 
+    def test_rotate_once(self):
+        self.tile.rotate(0)
+        self.assertListEqual(self.tile.walls,[1,0,1,0])
+        self.tile.rotate(1)
+        self.assertListEqual(self.tile.walls,[0,1,0,1])
+        self.tile.rotate(1)
+        self.assertListEqual(self.tile.walls,[1,0,1,0])
+        self.tile.rotate(1)
+        self.assertListEqual(self.tile.walls,[0,1,0,1])
+        self.tile.rotate(1)
+        self.assertListEqual(self.tile.walls,[1,0,1,0])
+
+    def test_rotate_twice(self):
+        self.tile.rotate(0)
+        self.assertListEqual(self.tile.walls,[1,0,1,0])
+        self.tile.rotate(2)
+        self.assertListEqual(self.tile.walls,[1,0,1,0])
+        self.tile.rotate(2)
+        self.assertListEqual(self.tile.walls,[1,0,1,0])
+
+    def test_rotate_three(self):
+        self.tile.rotate(0)
+        self.assertListEqual(self.tile.walls,[1,0,1,0])
+        self.tile.rotate(3)
+        self.assertListEqual(self.tile.walls,[0,1,0,1])
+        self.tile.rotate(3)
+        self.assertListEqual(self.tile.walls,[1,0,1,0])
+
+    def test_rotate_four(self):
+        self.tile.rotate(4)
+        self.assertListEqual(self.tile.walls,[1,0,1,0])
+
+    def test_ascii_art(self):
+        """
+        Test asci art of unittest Tile
+        """
+        self.assertListEqual(self.tile.ascii_art(),
+                ['+-------+',
+                 '         ',
+                 '         ',
+                 '         ',
+                 '+-------+']
+            )
+
+
+class Test_Tile_Types(unittest.TestCase):
+    """Test of different Tile types
+    """
+        
     def test_t(self):
         t = T()
         self.assertEqual(t.has_wall(Tile.NORTH),True)
@@ -86,56 +135,6 @@ class Test_Tile(unittest.TestCase):
         self.assertEqual(t.has_wall(Tile.SOUTH),False)
         self.assertEqual(t.has_wall(Tile.WEST), True)
 
-    def test_straight_rotated(self):
-        t = Straight(1)
-        self.assertEqual(t.has_wall(Tile.NORTH),True)
-        self.assertEqual(t.has_wall(Tile.EAST), False)
-        self.assertEqual(t.has_wall(Tile.SOUTH),True)
-        self.assertEqual(t.has_wall(Tile.WEST), False)
-
-    def test_rotate_once(self):
-        self.tile.rotate(0)
-        self.assertListEqual(self.tile.walls,[1,0,1,0])
-        self.tile.rotate(1)
-        self.assertListEqual(self.tile.walls,[0,1,0,1])
-        self.tile.rotate(1)
-        self.assertListEqual(self.tile.walls,[1,0,1,0])
-        self.tile.rotate(1)
-        self.assertListEqual(self.tile.walls,[0,1,0,1])
-        self.tile.rotate(1)
-        self.assertListEqual(self.tile.walls,[1,0,1,0])
-
-    def test_rotate_twice(self):
-        self.tile.rotate(0)
-        self.assertListEqual(self.tile.walls,[1,0,1,0])
-        self.tile.rotate(2)
-        self.assertListEqual(self.tile.walls,[1,0,1,0])
-        self.tile.rotate(2)
-        self.assertListEqual(self.tile.walls,[1,0,1,0])
-
-    def test_rotate_three(self):
-        self.tile.rotate(0)
-        self.assertListEqual(self.tile.walls,[1,0,1,0])
-        self.tile.rotate(3)
-        self.assertListEqual(self.tile.walls,[0,1,0,1])
-        self.tile.rotate(3)
-        self.assertListEqual(self.tile.walls,[1,0,1,0])
-
-    def test_rotate_four(self):
-        self.tile.rotate(4)
-        self.assertListEqual(self.tile.walls,[1,0,1,0])
-
-    def test_ascii_art(self):
-        """
-        Test asci art of unittest Tile
-        """
-        self.assertListEqual(self.tile.ascii_art(),
-                ['+-------+',
-                 '         ',
-                 '         ',
-                 '         ',
-                 '+-------+']
-            )
 
 
 
