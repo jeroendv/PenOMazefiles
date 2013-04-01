@@ -12,26 +12,26 @@ class MazeTile(object):
     MazeTile objects that respectively lie to the North, East, South
     and West of this MazeTile
     """
-    
+
     """
     Pointer to a Tile object. 
     This is never None.
     """
     tile = None
-   
-   """
-   a list of 4 MazeTiles that respectively lie to the North, East, South
-   and West of this MazeTile.
 
-   invar: A adjacent tile equal to None means that there is no adjacent
-   tile.
+    """
+    a list of 4 MazeTiles that respectively lie to the North, East, South
+    and West of this MazeTile.
 
-   invar: if links are not None then they are bidirectional.
-   if self.adjacentTiles[Tile.NORTH].adjacentTiles[Tile.SOUTH] is self
-   self.adjacentTiles[Tile.EAST].adjacentTiles[Tile.WEST] is self
-   self.adjacentTiles[Tile.SOUTH].adjacentTiles[Tile.NORTH] is self
-   self.adjacentTiles[Tile.WEST].adjacentTiles[Tile.EAST] is self
-   """
+    invar: A adjacent tile equal to None means that there is no adjacent
+    tile.
+
+    invar: if links are not None then they are bidirectional.
+    if self.adjacentTiles[Tile.NORTH].adjacentTiles[Tile.SOUTH] is self
+    self.adjacentTiles[Tile.EAST].adjacentTiles[Tile.WEST] is self
+    self.adjacentTiles[Tile.SOUTH].adjacentTiles[Tile.NORTH] is self
+    self.adjacentTiles[Tile.WEST].adjacentTiles[Tile.EAST] is self
+    """
     adjacentTiles = None
 
     def __init__(self, tile):
