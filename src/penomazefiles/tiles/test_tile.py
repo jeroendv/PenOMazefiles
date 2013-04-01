@@ -10,7 +10,7 @@ a module in the tiles package
 
 
 import unittest
-from Tile import *
+from .Tile import *
 
 
 class Test_Tile(unittest.TestCase):
