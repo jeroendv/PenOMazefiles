@@ -1,4 +1,8 @@
 #ignore python cache files
 __pycache__/
+
 #ignore compiled python files
 *.pyc
+
+#ignore the ctags database file
+/tags
