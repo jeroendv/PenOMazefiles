@@ -38,7 +38,7 @@ def MazeFileBuilder(stream):
 class MazeFileTokenizer(object):
     """
     Filter out comments from a sequence of text lines and split it in tokens.
-    These tokens are then given to a TokenConsumer for further processing.
+    These tokens are then passed to a consumer function for further processing.
 
     Each strings represents a single line from a mazefile. Comments start with
     a '#' character and run till the end of the line.
@@ -46,7 +46,10 @@ class MazeFileTokenizer(object):
     mazefile tokens are single words seperated by a newline or white space.
     """
 
+    # a token consumer function wich should accept a token as the single
+    # argument
     token_consumer = None
+
     stream = None
 
     def __init__(self,stream):
@@ -59,6 +62,9 @@ class MazeFileTokenizer(object):
     def addTokenConsumer(self,token_consumer):
         """subscribe a token consumer that will process all the tokens 
         generated from the stream of text lines when start() is invoked.
+
+        token_consumer should be a fuction which accepts a single token as
+        argument.
         """
         self.token_consumer = token_consumer
 
