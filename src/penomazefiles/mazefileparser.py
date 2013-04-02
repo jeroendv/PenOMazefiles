@@ -86,7 +86,7 @@ class MazeFileTokenizer(object):
             # split line in tokens
             tokens = line.split()
             for token in tokens:
-                self.token_consumer.consume(token)
+                self.token_consumer(token)
 
 class TokenConsumer(object):
     """
