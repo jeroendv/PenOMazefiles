@@ -46,6 +46,21 @@ class MazeFileTokenizer(object):
     mazefile tokens are single words seperated by a newline or white space.
     """
 
+    # todo: possibly turn the start method into a simple module function
+    # def tokenize(stream, consumer)
+    #
+    # con:
+    #  - it forces a bottum up construction of the parser blocks. because the
+    # consumer function must be defined before the top level tokenizer can be invoked.
+    #
+    # pro:
+    #  + shorter more compact code, I.e. a single function instead of a whole
+    #  class with several methods
+    #  + avoid unwanted behaviour, where the user could invoke start() twice.
+    #  Either this must be caught and raise an error or document that this
+    #  should simply not be done. Or ..  make the stream an argument of the
+    #  start() method.
+
     # a token consumer function wich should accept a token as the single
     # argument
     token_consumer = None
@@ -98,6 +113,9 @@ class TokenConsumer(object):
     """
     Abstract Consumer object for maze file Tokens
     """
+    #todo: elliminate this class. It serves as an java like 'abstract class'
+    #which is nonsensical in python which doens't really have such a language
+    #construct
         
     def consume(self, token):
         """Consume mazefile tokens"""
