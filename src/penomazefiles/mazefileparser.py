@@ -215,23 +215,65 @@ class MazeFileParser(TokenConsumer):
 
 
 class MazeTokenParser(object):
-    """Class to parse Tokens with an associated coordinate.
-
-    Turning tokens into a Tile objects which are then added to a maze
+    """Class to parse Tokens (coordinate, token) tuples produced by the MazeFileParser object
+    it turns token into proper Tile Objects and builds a Maze Object
     """
 
     from .Maze import Maze
     _maze = Maze()
 
-    def TokenParser(self,coordinate, token):
-        """docstring for lass to parse Maze tokens and turn them into valid Tile obj"""
-        # TODO: write code...
-        pass
+    # dictionary of valid tile tokens mapped to actual tiles
+    from .tiles import Tile
+    _TILES = {'Straigh': Tile.Straight(),
+              'Corner': Tile.Corner(),
+              'T': Tile.T(),
+              'DeadEnd':Tile.DeadEnd(),
+              'Cross':Tile.Cross(),
+              'Closed':Tile.Closed(),
+              'Seesaw':Tile.Seesaw()}
+
+
+    # dictionary of valid orientation tokens mapped to the required number or
+    # rotations.
+    _ROTATIONS = {'N': 0,
+                  'E': 1,
+                  'S': 2,
+                  'W': 3}
+
 
     def getMaze(self):
         """
-        doc
+        Return the maze object
         """
         return self._maze
+
+    def consume(self,token):
+        coordinate = token[0]
+        token = token[1]
+
+        tokenparts = token.split('.')
+
+        if len(tokenparts) <2 :
+            raise SpecificationViolationError(
+                'Each tile token must consist of at least a tile and an orientation seperated by a point')
+    
+        try:
+            tile = self._TILES[tokenparts[0]]
+        except KeyError:
+            raise SpecificationViolationError(
+                    "Invalid tile token '{:s}'".format(tokenparts[0]))
+
+        try:
+            rotations = self._ROTATIONS[tokenparts[1]]
+        except KeyError:
+            raise SpecificationViolationError(
+                    "Invalid Orientation Token '{:s}'".format(tokenparts[1]))
+
+        self._maze.add_tile(coordinate,tile.rotate(rotations))
+
+
+
+
+            
 
 
