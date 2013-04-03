@@ -66,6 +66,7 @@ class Test_MazeFileParser(unittest.TestCase):
                   ((0,1),'token.3'), ((1,1),'token.4'),
                   ((0,2),'token.5'), ((1,2),'token.6')]
 
+
     def test_valid_tokenstream(self):
         """parse a valid 2x3 mazefile token stream"""
         
@@ -144,6 +145,31 @@ class Test_MazeFileParser(unittest.TestCase):
 
 
 
+class Test_MazeFileBuilder(unittest.TestCase):
+    """Test of the MazeFileBuilder function"""
+
+    def setUp(self):
+        # string list corresponding the lines of apossible mazefile
+        self.input_linelist = ['2 2',
+                  '', # empty line
+                  ' # some comment line',
+                  'Straight.N    Corner.E '
+                  'T.S    Closed.W' ]
+
+        # the true maze object
+        self.true_maze = penomazefiles.Maze.Maze()
+        self.true_maze.add_tile((0,0), penomazefiles.tiles.Tile.Straight(0))
+        self.true_maze.add_tile((1,0), penomazefiles.tiles.Tile.Corner(1))
+        self.true_maze.add_tile((0,1), penomazefiles.tiles.Tile.T(2))
+        self.true_maze.add_tile((1,1), penomazefiles.tiles.Tile.Closed(3))
+
+
+    def test_mazebuilder(self):
+        maze = MazeFileBuilder(self.input_linelist)
+
+        self.assertEqual(maze,self.true_maze)
+
+        
 
 if __name__ == '__main__':
     unittest.main()

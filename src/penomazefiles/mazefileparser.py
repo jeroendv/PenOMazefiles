@@ -21,14 +21,16 @@ def MazeFileBuilder(stream):
 
     Return a Maze 
     """
+    # step 1: tokenizing the stream
     token_stream = MazeFileTokenizer(stream)
 
+    # step 2: extend tiles with coordinate information
     mazefile_parser = MazeFileParser()
-    token_stream.addTokenConsumer(mazefile_parser)
+    token_stream.addTokenConsumer(mazefile_parser.consumeToken)
 
-
+    # step 3; build a Maze object
     mazetoken_parser = MazeTokenParser()
-    mazefile_parser.add_token_parser(mazetoken_parser)
+    mazefile_parser.add_token_parser(mazetoken_parser.consume)
 
     token_stream.start()
     return mazetoken_parser.getMaze()
@@ -224,7 +226,7 @@ class MazeTokenParser(object):
 
     # dictionary of valid tile tokens mapped to actual tiles
     from .tiles import Tile
-    _TILES = {'Straigh': Tile.Straight(),
+    _TILES = {'Straight': Tile.Straight(),
               'Corner': Tile.Corner(),
               'T': Tile.T(),
               'DeadEnd':Tile.DeadEnd(),
@@ -270,10 +272,4 @@ class MazeTokenParser(object):
                     "Invalid Orientation Token '{:s}'".format(tokenparts[1]))
 
         self._maze.add_tile(coordinate,tile.rotate(rotations))
-
-
-
-
-            
-
 
