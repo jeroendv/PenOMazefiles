@@ -26,7 +26,8 @@ class Test_MazeFileTokenizer(unittest.TestCase):
         # construct a tokenizer object on the linestream
         t = MazeFileTokenizer(linestream)
 
-        #initialize TokenListBuilder object and register it with the tokenizer
+        #initialize TokenListBuilder object and register it's consumer method
+        #with the tokenizer
         token_listbuilder = TokenListBuilder()
         t.addTokenConsumer(token_listbuilder.consume)
 
@@ -41,7 +42,8 @@ class Test_MazeFileTokenizer(unittest.TestCase):
 
 class TokenListBuilder(penomazefiles.mazefileparser.TokenConsumer):
     """
-    Token consumer that builds a list of all consumed tokens
+    Token consumer that builds a list of all consumed tokens produced by the
+    MazeFileTokenizer
     """
     tokenlist = []
 
