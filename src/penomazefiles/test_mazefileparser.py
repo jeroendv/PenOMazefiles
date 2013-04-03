@@ -13,14 +13,16 @@ class Test_MazeFileTokenizer(unittest.TestCase):
         # string list corresponding the lines of apossible mazefile
         linestream = ['2 3',
                   'token.1  token2 #comment',
-                  'token.drie']
+                  'token.drie #multiword comment',
+                  "4'th_token"]
 
         # the list of tokens in present in the linestream
         true_tokenlist = ['2',
                      '3',
                      'token.1',
                      'token2',
-                     'token.drie']
+                     'token.drie',
+                     "4'th_token"]
 
 
         # construct a tokenizer object on the linestream
