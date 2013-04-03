@@ -99,7 +99,8 @@ class Test_MazeFileParser(unittest.TestCase):
             
     def test_tobig_tokenstream(self):
         """
-        test an 2x3 mazefile token stream which contains one tile token to much
+        check that a SpecificationViolationError is raised when procosessing
+        a 2x3 mazefile token stream which contains one tile token to much
         """
         
         self.input_tokenlist.append(((10,10),'token'))
@@ -127,7 +128,7 @@ class Test_MazeFileParser(unittest.TestCase):
 
     def test_missingdimnsion_tokenstream(self):
         """
-        chech that a SpecificationViolationError is raised when procosessing
+        check that a SpecificationViolationError is raised when procosessing
         a 2x3 mazefile token stream which which does not start with 2 integers
         to specify maze dimentions
         """
