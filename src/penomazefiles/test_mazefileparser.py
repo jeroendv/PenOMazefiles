@@ -28,8 +28,7 @@ class Test_MazeFileTokenizer(unittest.TestCase):
         # construct a tokenizer object on the linestream
         t = MazeFileTokenizer(linestream)
 
-        #initialize TokenListBuilder object and register it's consumer method
-        #with the tokenizer
+        # build a list of all generated tokens
         tokenlist = []
         t.addTokenConsumer(tokenlist.append)
 
