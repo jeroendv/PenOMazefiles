@@ -80,6 +80,17 @@ class Test_Tile(unittest.TestCase):
                  '+-------+']
             )
 
+    def test_tile_equality(self):
+        self.assertEqual(Straight(), Straight())
+        self.assertEqual(Straight(), Straight(4))
+        self.assertEqual(Straight(), Straight(2))
+
+        self.assertNotEqual(Straight(),Straight(1))
+        self.assertNotEqual(Straight(),Corner())
+        self.assertNotEqual(Straight(),Seesaw())
+
+
+
 
 class Test_Tile_Types(unittest.TestCase):
     """Test of different Tile types

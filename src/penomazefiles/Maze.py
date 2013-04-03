@@ -70,7 +70,7 @@ class Maze(object):
 
     def get_rectangular_bbox(self):
         """
-        Compute a bounding box of the current maze.
+        compute a bounding box of the current maze.
 
         Returns  a tuple of coordinates (lu, rl). lu is the coordinate of the
         left upper point of the bounding box while rl is the coordinate of the
