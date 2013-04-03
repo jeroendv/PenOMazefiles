@@ -125,6 +125,23 @@ class Test_MazeFileParser(unittest.TestCase):
         self.assertListEqual(outputlist, self.true_outputlist)
 
 
+    def test_missingdimnsion_tokenstream(self):
+        """
+        chech that a SpecificationViolationError is raised when procosessing
+        a 2x3 mazefile token stream which which does not start with 2 integers
+        to specify maze dimentions
+        """
+        
+        # delete the first token specifying maze width
+        del self.input_tokenlist[0]
+
+        # check whether an SpecificationViolationError is raised
+        parser = MazeFileParser()
+        with self.assertRaises(SpecificationViolationError):
+            for  token in self.input_tokenlist:
+                parser.consumeToken(token)
+
+
 
 
 if __name__ == '__main__':
