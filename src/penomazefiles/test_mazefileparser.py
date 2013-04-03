@@ -12,6 +12,8 @@ class Test_MazeFileTokenizer(unittest.TestCase):
         """
         # string list corresponding the lines of apossible mazefile
         linestream = ['2 3',
+                  '', # empty line
+                  ' # some comment line',
                   'token.1  token2 #comment',
                   'token.drie #multiword comment',
                   "4'th_token"]
@@ -47,6 +49,12 @@ class Test_MazeFileParser(unittest.TestCase):
 
     def setUp(self):
         # string list corresponding the lines of apossible mazefile
+        self.input_linelist = ['2 3',
+                  '', # empty line
+                  ' # some comment line',
+                  'token.1    token.2 #line 1',
+                  'token.3    token.4 # example comment',
+                  'token.5    token.6']
         self.input_tokenlist= ['2','3',
                   'token.1', 'token.2',
                   'token.3', 'token.4',
@@ -100,6 +108,21 @@ class Test_MazeFileParser(unittest.TestCase):
         with self.assertRaises(SpecificationViolationError):
             for  token in self.input_tokenlist:
                 parser.consumeToken(token)
+
+
+    def test_withTokenizer(self):
+        """docstring for # string list corresponding the lines of apossible m"""
+
+        tokenizer = MazeFileTokenizer(self.input_linelist)
+
+        parser = MazeFileParser()
+        tokenizer.addTokenConsumer(parser.consumeToken)
+
+        outputlist = []
+        parser.add_token_parser(outputlist.append)
+
+        tokenizer.start()
+        self.assertListEqual(outputlist, self.true_outputlist)
 
 
 
