@@ -49,6 +49,7 @@ class Maze(object):
 
     def __init__(self):
         super(Maze, self).__init__()
+        self._maze = {}
 
     def add_tile(self, coordinate, tile):
         """Add a tile to this maze on a specific coordinate
