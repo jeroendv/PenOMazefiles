@@ -79,4 +79,13 @@ class Maze(object):
         #todo: implement
         raise NotImplementedError()
 
+    def __eq__(self,other):
+        if isinstance(other,self.__class__):
+            return other._maze == self._maze
+        else:
+            return False
+
+    def __ne__(self,other):
+        return not self.__eq__(other)
+
 
