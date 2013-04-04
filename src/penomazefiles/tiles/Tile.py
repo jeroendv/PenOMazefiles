@@ -90,6 +90,9 @@ class Tile(object):
         str_ = str_ + ')'
         return str_
 
+    def __repr__(self):
+        return self.__str__()
+
 
     def ascii_art(self):
         """
