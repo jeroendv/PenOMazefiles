@@ -1,1 +1,10 @@
+#todo: ascii art renderer for a maze
 
+#todo: maze consistency checks
+Create a number of checks that a maze should pass in order to be valid
+ + only barcodeson straights
+ + object only in a deadend
+ + deadend with object must be predixed by barcode
+ + presence of 4 robot start positions
+ + seesaw tile configuration
+ + tiles that  touch must have a identical border condition
