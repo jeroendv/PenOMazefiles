@@ -89,6 +89,10 @@ class Test_Tile(unittest.TestCase):
         self.assertNotEqual(Straight(),Corner())
         self.assertNotEqual(Straight(),Seesaw())
 
+    def test_CornerRotate(self):
+        self.assertEqual(Corner(1), Corner(0).rotate(1))
+        self.assertEqual(Corner(1).walls, [1,1,0,0])
+
 
 
 
