@@ -163,11 +163,50 @@ class Test_MazeFileBuilder(unittest.TestCase):
         self.true_maze.add_tile((0,1), penomazefiles.tiles.Tile.T(2))
         self.true_maze.add_tile((1,1), penomazefiles.tiles.Tile.Closed(3))
 
+    def tearDown(self):
+        self.input_linelist = None
+
 
     def test_mazebuilder(self):
         maze = MazeFileBuilder(self.input_linelist)
 
         self.assertEqual(maze,self.true_maze)
+
+    def test_invalid_tiletoken(self):
+        # string list corresponding the lines of apossible mazefile
+        self.input_linelist = ['2 2',
+                  '', # empty line
+                  ' # some comment line',
+                  'Straigh.N    Corner.E '
+                  'T.S    Closed.W' ]
+    
+        with  self.assertRaises(SpecificationViolationError):
+            maze = MazeFileBuilder(self.input_linelist)
+
+
+    def test_invalid_orientationtoken(self):
+        # string list corresponding the lines of apossible mazefile
+        self.input_linelist = ['2 2',
+                  '', # empty line
+                  ' # some comment line',
+                  'Straight.N    Corner.E '
+                  'T.S    Closed.Z' ]
+    
+        with  self.assertRaises(SpecificationViolationError):
+            maze = MazeFileBuilder(self.input_linelist)
+
+    def test_invalid_missingOrientationtoken(self):
+        # string list corresponding the lines of apossible mazefile
+        self.input_linelist = ['2 2',
+                  '', # empty line
+                  ' # some comment line',
+                  'Straight.N    Corner.E '
+                  'T.S    Closed.' ]
+    
+        with  self.assertRaises(SpecificationViolationError):
+            maze = MazeFileBuilder(self.input_linelist)
+
+
 
         
 

@@ -102,6 +102,10 @@ class Test_Tile(unittest.TestCase):
         self.assertNotEqual(Tile([0,1,0,1]),Straight())
         self.assertNotEqual(Straight(),Tile([0,1,0,1]))
 
+    def test_CornerRotate(self):
+        self.assertEqual(Corner(1), Corner(0).rotate(1))
+        self.assertEqual(Corner(1).walls, [1,1,0,0])
+
 
 
 

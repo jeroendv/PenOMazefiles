@@ -42,9 +42,6 @@ class Test_Maze(unittest.TestCase):
         maze2.add_tile((0,1), penomazefiles.tiles.Tile.T(2))
         maze2.add_tile((1,1), penomazefiles.tiles.Tile.Closed())
 
-        print(maze1)
-        print(maze2)
-
         self.assertEqual(maze1,maze2)
         self.assertTrue(maze1 == maze2)
         self.assertFalse(maze1 != maze2)

@@ -14,6 +14,7 @@ the presence of an object.
 
 see Toledo for specifications of mazefiles
 '''
+import copy
 
 def MazeFileBuilder(stream):
     """
@@ -264,6 +265,9 @@ class MazeTokenParser(object):
         except KeyError:
             raise SpecificationViolationError(
                     "Invalid tile token '{:s}'".format(tokenparts[0]))
+        else:
+            #todo: replace with a proper Tile specific deepcopy routine
+            tile = copy.deepcopy(tile)
 
         try:
             rotations = self._ROTATIONS[tokenparts[1]]
