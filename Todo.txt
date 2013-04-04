@@ -1,13 +1,1 @@
-# todo: Elliminate the TokenConsumer class
-In python, the producer-consumer or event generator-event listener
-pradigm doesn't require that consumer/listener is an object.
 
-In java everything is an object and you can only pass objects around not
-functions. Hence in java there is the need to define a listener
-interface for each event which must be implemented by any object that
-wishes to listen to these events.
-
-In python the listener or consumer can simply be a function. Firing a
-new event is as simple as invoking a method with a given set of
-arguments.  Whether that function is a module function or a method
-related to an object is completely irrelevant.

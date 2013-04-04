@@ -112,17 +112,6 @@ class MazeFileTokenizer(object):
             for token in tokens:
                 self.token_consumer(token)
 
-class TokenConsumer(object):
-    """
-    Abstract Consumer object for maze file Tokens
-    """
-    #todo: elliminate this class. It serves as an java like 'abstract class'
-    #which is nonsensical in python which doens't really have such a language
-    #construct
-        
-    def consume(self, token):
-        """Consume mazefile tokens"""
-        raise NotImplementedError()
 
 class SpecificationViolationError(Exception):
     """Raised in case of mazefile syntax violations. 
@@ -133,7 +122,7 @@ class SpecificationViolationError(Exception):
     """
         
 
-class MazeFileParser(TokenConsumer):
+class MazeFileParser(object):
     """
     A mazefile describes a rectangular maze with implicitly defined tile
     coordinates. A MazeFileParser object enriches the tile tokens from such a
