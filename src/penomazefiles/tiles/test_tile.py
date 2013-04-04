@@ -88,6 +88,19 @@ class Test_Tile(unittest.TestCase):
         self.assertNotEqual(Straight(),Straight(1))
         self.assertNotEqual(Straight(),Corner())
         self.assertNotEqual(Straight(),Seesaw())
+        self.assertNotEqual(Seesaw(),Straight())
+
+    def test_reflexive_equality_of_withsubclass(self):
+        """
+        Check reflexivity property of '==' opertor when comparing two object
+        with parent child relation.
+
+        Note that python 3 and 2 behave differently when comparing two elements
+        with parent child link. Hence this explicit test.
+        """
+
+        self.assertNotEqual(Tile([0,1,0,1]),Straight())
+        self.assertNotEqual(Straight(),Tile([0,1,0,1]))
 
 
 
