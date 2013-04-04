@@ -170,8 +170,6 @@ class Test_MazeFileBuilder(unittest.TestCase):
     def test_mazebuilder(self):
         maze = MazeFileBuilder(self.input_linelist)
 
-        print('\n',maze._maze)
-        print('\n',self.true_maze._maze)
         self.assertEqual(maze,self.true_maze)
 
     def test_invalid_tiletoken(self):
