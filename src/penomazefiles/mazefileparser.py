@@ -266,6 +266,7 @@ class MazeTokenParser(object):
             raise SpecificationViolationError(
                     "Invalid tile token '{:s}'".format(tokenparts[0]))
         else:
+            #todo: replace with a proper Tile specific deepcopy routine
             tile = copy.deepcopy(tile)
 
         try:
