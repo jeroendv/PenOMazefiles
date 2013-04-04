@@ -1,0 +1,2 @@
+#fixme: The Seeasaw tile has an explicit orienttion that marks its intrance
+This is not supported by the current Tile Class.
