@@ -94,7 +94,10 @@ class MazeFileTokenizer(object):
         if self.token_consumer is None:
             return
 
+        lineNb = 0
         for line in self.stream:
+            lineNb +=1
+
             # remove comments
             comment_start_index = line.find('#')
             if(comment_start_index != -1):
@@ -109,8 +112,15 @@ class MazeFileTokenizer(object):
 
             # split line in tokens
             tokens = line.split()
+            tokenNb =0
             for token in tokens:
-                self.token_consumer(token)
+                tokenNb +=1
+                try:
+                    self.token_consumer(token)
+                except SpecificationViolationError:
+                    print('line nb: {:d}, Token nb: {:d}'.format(lineNb,tokenNb))
+                    print('token value: {:s}'.format(token))
+                    raise
 
 
 class SpecificationViolationError(Exception):
