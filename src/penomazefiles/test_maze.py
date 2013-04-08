@@ -1,6 +1,8 @@
 import unittest
 from .Maze  import *
 import penomazefiles.tiles.Tile
+from penomazefiles.tiles import Tile
+import io
 
 class Test_Maze(unittest.TestCase):
     """
@@ -62,3 +64,34 @@ class Test_Maze(unittest.TestCase):
         self.assertTrue(maze1 != maze2)
         self.assertNotEqual(maze1, maze2)
         self.assertFalse(maze1 == maze2)
+
+    def test_get_boundingbox(self):
+        maze1 = Maze()
+        maze1.add_tile((0,0), penomazefiles.tiles.Tile.Straight(0))
+        maze1.add_tile((1,0), penomazefiles.tiles.Tile.Corner(1))
+        maze1.add_tile((0,1), penomazefiles.tiles.Tile.T(2))
+        maze1.add_tile((1,1), penomazefiles.tiles.Tile.Closed())
+
+        self.assertEqual(maze1.get_boundingbox(), ((0,0),(2,2)))
+
+class Test_AsciiArtRenderer(unittest.TestCase):
+    
+    def test_description(self):
+        maze = Maze()
+        maze.add_tile((1,1), Tile.Corner())
+        maze.add_tile((2,1), Tile.Corner(1))
+
+        true_stream = """+-------++-------+
+|                |
+|                |
+|                |
++       ++       +
+"""
+
+        stream = io.StringIO()
+        AsciiArtRenderer().render(maze,stream)
+
+        self.assertEqual(stream.getvalue(),true_stream)
+
+        stream.close()
+        
