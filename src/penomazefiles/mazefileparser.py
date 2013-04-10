@@ -117,9 +117,17 @@ class MazeFileTokenizer(object):
                 tokenNb +=1
                 try:
                     self.token_consumer(token)
-                except SpecificationViolationError:
-                    print('line nb: {:d}, Token nb: {:d}'.format(lineNb,tokenNb))
-                    print('token value: {:s}'.format(token))
+                except SpecificationViolationError as e:
+                    #Todo:reraise the exception but some how augment it with the
+                    # following information instead of printing it directly to
+                    # sys.stdout
+                    e.line_nb = lineNb
+                    e.token_nb = tokenNb
+                    e.token_value = token
+                    print('line number: {:d}'.format(lineNb))
+                    print('line value: {!r}'.format(line))
+                    print('token number: {:d}'.format(tokenNb))
+                    print('{!s}'.format(e.args))
                     raise
 
 
@@ -130,7 +138,10 @@ class SpecificationViolationError(Exception):
 
     The args attribute may contain some extra info.
     """
-        
+    def __init__(self,args):
+        super().__init__(args)
+        print('SpecificationViolationError: {!s}'.format(str(args)))
+
 
 class MazeFileParser(object):
     """
@@ -178,6 +189,7 @@ class MazeFileParser(object):
             try:
                 self.width = int(token)
             except ValueError:
+                print('token value: {:s}'.format(token))
                 raise SpecificationViolationError(
                     'The first token must be an integer')
 
@@ -185,26 +197,33 @@ class MazeFileParser(object):
             try:
                 self.height = int(token)
             except ValueError:
+                print('token value: {:s}'.format(token))
                 raise SpecificationViolationError(
                     'The second token must be an integer')
         else:
             
             if self.currentX > self.width-1:
+                print('token value: {:s}'.format(token))
                 raise SpecificationViolationError(
                         'To many tiles')
 
             if self.currentY > self.height-1:
+                print('token value: {:s}'.format(token))
                 raise SpecificationViolationError(
                         'To many tiles')
-
-            self.produce(((self.currentX,self.currentY),token))
-
-            #update the coordinate
-            if(self.currentX < self.width-1):
-                self.currentX += 1
-            else:
-                self.currentX = 0
-                self.currentY += 1
+            try:
+                self.produce(((self.currentX,self.currentY),token))
+            except SpecificationViolationError as e:
+                print('coordinate: ({:d},{:d})'.format(self.currentX,self.currentY))
+                print('Skip this coordinate.')
+                raise
+            finally:
+                #update the coordinate
+                if(self.currentX < self.width-1):
+                    self.currentX += 1
+                else:
+                    self.currentX = 0
+                    self.currentY += 1
 
 
 
@@ -255,24 +274,29 @@ class MazeTokenParser(object):
 
         tokenparts = token.split('.')
 
-        if len(tokenparts) <2 :
-            raise SpecificationViolationError(
-                'Each tile token must consist of at least a tile and an orientation seperated by a point')
-    
-        try:
-            tile = self._TILES[tokenparts[0]]
-        except KeyError:
-            raise SpecificationViolationError(
-                    "Invalid tile token '{:s}'".format(tokenparts[0]))
-        else:
-            #todo: replace with a proper Tile specific deepcopy routine
-            tile = copy.deepcopy(tile)
+        try: 
+            if len(tokenparts) <2 :
+                raise SpecificationViolationError(
+                    'Each tile token must consist of at least a tile and an orientation seperated by a point')
 
-        try:
-            rotations = self._ROTATIONS[tokenparts[1]]
-        except KeyError:
-            raise SpecificationViolationError(
-                    "Invalid Orientation Token '{:s}'".format(tokenparts[1]))
+            try:
+                tile = self._TILES[tokenparts[0]]
+            except KeyError:
+                raise SpecificationViolationError(
+                        "Invalid tile token '{:s}'".format(tokenparts[0]))
+            else:
+                #todo: replace with a proper Tile specific deepcopy routine
+                tile = copy.deepcopy(tile)
+
+            try:
+                rotations = self._ROTATIONS[tokenparts[1]]
+            except KeyError as e:
+                raise SpecificationViolationError(
+                        "Invalid Orientation Token '{:s}'".format(tokenparts[1])) from e
+
+        except SpecificationViolationError:
+            print('token value: {:s}'.format(token))
+            raise
 
         self._maze.add_tile(coordinate,tile.rotate(rotations))
 
