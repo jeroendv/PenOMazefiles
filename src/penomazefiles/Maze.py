@@ -126,7 +126,7 @@ class AsciiArtRenderer(object):
                     if tile is not None:
                         stream.write(tile.ascii_art()[minor_row_index])
                     else:
-                        stream.write(' '*8)
+                        stream.write(' '*9)
                 # end the line with a newline
                 stream.write('\n')
 
