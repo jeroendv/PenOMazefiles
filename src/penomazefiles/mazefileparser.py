@@ -167,14 +167,16 @@ class MazeFileParser(object):
     function for further processing.
     """
 
-    width = None
-    height = None
+    def __init__(self):
+        self.width = None
+        self.height = None
 
-    # coordinate of the next tile token
-    currentX = 0
-    currentY = 0
 
-    maze_token_parser = None
+        # coordinate of the next tile token
+        self.currentX = 0
+        self.currentY = 0
+
+        self.maze_token_parser = None
 
     def add_token_parser(self, token_parser):
         """
@@ -240,8 +242,7 @@ class MazeTokenParser(object):
     it turns token into proper Tile Objects and builds a Maze Object
     """
 
-    from .Maze import Maze
-    _maze = Maze()
+    _maze = None
 
     # dictionary of valid tile tokens mapped to actual tiles
     from .tiles import Tile
@@ -260,6 +261,11 @@ class MazeTokenParser(object):
                   'E': 1,
                   'S': 2,
                   'W': 3}
+
+    def __init__(self):
+        """docstring for # TODO: write """
+        from .Maze import Maze
+        self._maze= Maze()
 
 
     def getMaze(self):
