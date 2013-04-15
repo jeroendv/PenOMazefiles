@@ -1,2 +1,16 @@
 #fixme: The Seeasaw tile has an explicit orienttion that marks its intrance
 This is not supported by the current Tile Class.
+
+
+#fixme: deprecation warning when running unit test
+    
+    $ make test
+    ./home/jeroendv_f16/CodingProjects/PenOMazefiles/src/penomazefiles/mazefileparser.py:211:
+    PendingDeprecationWarning: object.__format__ with a non-empty format string is deprecated
+    print('token value: {:s}'.format(token))
+
+    $ git show --summary
+    7ba9205ccb4f4c4592091dc7deab68c056889be8 Print extra information when raising an error
+
+
+
