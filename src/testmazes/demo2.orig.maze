@@ -1,0 +1,20 @@
+
+# original maze file created by jeroen 
+# 2012-2013, sem2, demo 2
+#
+# Several things are *wrong* with this maze file
+#  + incorrectly written tile tokens
+#  + touching tiles with inconsistent wall configurations
+#  + incorrect maze height
+#
+
+10 0
+
+Cross.N Cross.N Closed.N DeadEnd.N.V Cross.N Cross.N DeadEnd.N.S1E DeadEnd.N.V Cross.N Cross.N
+Cross.N Cross.N Closed.N Straight.N.04 Cross.N Cross.N Straight.N Straight.N.01 Cross.N Cross.N
+Cross.N Cross.N Corner.N.S3N Cross.N Corner.E Corner.N Cross.N T.E Cross.N Cross.N
+Cross.N Cross.N DeadEnd.S Straight.N.11 T.W T.E Straight.N.17 DeadEnd.S Cross.N Cross.N
+Cross.N Cross.N Closed.N Seasaw.N DeadEnd.S Straight.N.55 Seasaw.N Closed.n Cross.N Cross.N
+Cross.N Cross.N Closed.N Seasaw.S Corner.N Corner.S Seasaw.S Closed.N Cross.N Cross.N
+DeadEnd.E.V Straight.W.03 Corner.E.S4N Straight.N.13 T.W Corner.E Straight.N.15 Corner.N Straight.E DeadEnd.E
+DeadEnd.W DeadEnd.E Corner.W T.S Corner.S Corner.W  T.S.S2W T.S Straight.E.06 DeadEnd.E.S4N.VT.N				Corner.E		Corner.W	T.S				Corner.S	Corner.W	T.S				T.S				Straight.W.05	DeadEnd.E.V

@@ -1,0 +1,22 @@
+
+# fixed version of the mazefile found at
+#
+#   src/testmazes/demo2.orig.maze
+
+# fixes:
+#  + width is 8 not zero
+#  + s/Seasaw/Seesaw/g
+#  + 'n' is invalid orientation, use 'N' instead
+
+10 8
+
+Cross.N Cross.N Closed.N DeadEnd.N.V Cross.N Cross.N DeadEnd.N.S1E DeadEnd.N.V Cross.N Cross.N
+Cross.N Cross.N Closed.N Straight.N.04 Cross.N Cross.N Straight.N Straight.N.01 Cross.N Cross.N
+Cross.N Cross.N Corner.N.S3N Cross.N Corner.E Corner.N Cross.N T.E Cross.N Cross.N
+Cross.N Cross.N DeadEnd.S Straight.N.11 T.W T.E Straight.N.17 DeadEnd.S Cross.N Cross.N
+Cross.N Cross.N Closed.N Seesaw.N DeadEnd.S Straight.N.55 Seesaw.N Closed.N Cross.N Cross.N
+Cross.N Cross.N Closed.N Seesaw.S Corner.N Corner.S Seesaw.S Closed.N Cross.N Cross.N
+DeadEnd.E.V Straight.W.03 Corner.E.S4N Straight.N.13 T.W Corner.E Straight.N.15 Corner.N Straight.E DeadEnd.E
+DeadEnd.W DeadEnd.E Corner.W T.S Corner.S Corner.W  T.S.S2W T.S Straight.E.06 DeadEnd.E.S4N.V
+
+
