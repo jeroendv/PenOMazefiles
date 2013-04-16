@@ -1,5 +1,5 @@
 '''
-File: test_tile.py
+File: test_tiles.py
 Author: Me
 Description: 
 
