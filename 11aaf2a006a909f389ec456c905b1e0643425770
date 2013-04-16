@@ -1,0 +1,3 @@
+new branch: projectRestructuring
+
+rename the module Maze.py to maze.py according to the pep8 conventions
