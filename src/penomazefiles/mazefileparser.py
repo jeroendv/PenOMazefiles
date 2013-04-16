@@ -245,14 +245,14 @@ class MazeTokenParser(object):
     _maze = None
 
     # dictionary of valid tile tokens mapped to actual tiles
-    from .tiles import Tile
-    _TILES = {'Straight': Tile.Straight(),
-              'Corner': Tile.Corner(),
-              'T': Tile.T(),
-              'DeadEnd':Tile.DeadEnd(),
-              'Cross':Tile.Cross(),
-              'Closed':Tile.Closed(),
-              'Seesaw':Tile.Seesaw()}
+    from . import tiles
+    _TILES = {'Straight': tiles.Straight(),
+              'Corner': tiles.Corner(),
+              'T': tiles.T(),
+              'DeadEnd':tiles.DeadEnd(),
+              'Cross':tiles.Cross(),
+              'Closed':tiles.Closed(),
+              'Seesaw':tiles.Seesaw()}
 
 
     # dictionary of valid orientation tokens mapped to the required number or
