@@ -5,6 +5,7 @@ Description:
 
 Module for code related to maze files
 '''
+from .tiles import Tile
 
 class Maze(object):
     """A Maze is a collection of 'Tile' objects
@@ -135,3 +136,54 @@ class AsciiArtRenderer(object):
 
 
 
+def are_walls_consistent(maze):
+    """
+    when two tiles touch then they should both have a wall or both be open.
+    If this is not the case then maze is inconsistent.
+
+    Return False if any two touching tiles are inconsistent. Return True otherwise
+    """
+
+    for ((x,y), current_tile) in iter(maze):
+        # check to the north of the current tile
+        bordering_tile = maze.get_tile((x,y-1))
+        if bordering_tile is None:
+            # if there is no bordering tile then there can't be any consistency
+            # problems :-)
+            pass
+        else:
+            if bordering_tile.has_wall(Tile.SOUTH) != current_tile.has_wall(Tile.NORTH):
+                return False
+
+        # check to the South of the current tile
+        bordering_tile = maze.get_tile((x,y+1))
+        if bordering_tile is None:
+            # if there is no bordering tile then there can't be any consistency
+            # problems :-)
+            pass
+        else:
+            if bordering_tile.has_wall(Tile.NORTH) != current_tile.has_wall(Tile.SOUTH):
+                return False
+
+        # check to the East of the current tile
+        bordering_tile = maze.get_tile((x+1,y))
+        if bordering_tile is None:
+            # if there is no bordering tile then there can't be any consistency
+            # problems :-)
+            pass
+        else:
+            if bordering_tile.has_wall(Tile.WEST) != current_tile.has_wall(Tile.EAST):
+                return False
+
+        # check to the West of the current tile
+        bordering_tile = maze.get_tile((x-1,y))
+        if bordering_tile is None:
+            # if there is no bordering tile then there can't be any consistency
+            # problems :-)
+            pass
+        else:
+            if bordering_tile.has_wall(Tile.EAST) != current_tile.has_wall(Tile.WEST):
+                return False
+
+    # all tiles are consistent
+    return True
