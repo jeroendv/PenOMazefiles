@@ -77,25 +77,25 @@ class Maze(object):
         right lower point of the bounding box
         """
         tile_iterator = iter(self)
-        value = next(tile_iterator)
-        if value[1] is not None:
-            min_x = value[0][0]
-            max_x = min_x + 1
-            min_y = value[0][1]
-            max_y = min_y + 1
+        (coordinate,tile) = next(tile_iterator)
+        assert(tile is not None)
+        min_x = coordinate[0]
+        max_x = min_x + 1
+        min_y = coordinate[1]
+        max_y = min_y + 1
 
-        for value in tile_iterator:
-            if value[1] is not None:
-                if value[0][0] < min_x:
-                    min_x = value[0][0]
-                if value[0][0]+1> max_x:
-                    max_x = value[0][0] +1
-                if value[0][1] < min_y:
-                    min_y = value[0][1]
-                if value[0][1]+1> max_y:
-                    max_y = value[0][1] +1
+        for (coordinate,tile) in tile_iterator:
+            if coordinate[0] < min_x:
+                min_x = coordinate[0]
+            if coordinate[0]+1> max_x:
+                max_x = coordinate[0] +1
+            if coordinate[1] < min_y:
+                min_y = coordinate[1]
+            if coordinate[1]+1> max_y:
+                max_y = coordinate[1] +1
 
         return ((min_x, min_y), (max_x, max_y))
+
 
     def __eq__(self,other):
         if isinstance(other,self.__class__):
@@ -132,5 +132,6 @@ class AsciiArtRenderer(object):
                         stream.write(' '*9)
                 # end the line with a newline
                 stream.write('\n')
+
 
 
