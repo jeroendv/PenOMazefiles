@@ -1,7 +1,6 @@
 import unittest
 from .Maze  import *
-import penomazefiles.tiles.Tile
-from penomazefiles.tiles import Tile
+from penomazefiles import tiles
 import io
 
 class Test_Maze(unittest.TestCase):
@@ -33,16 +32,16 @@ class Test_Maze(unittest.TestCase):
 
     def test_equality(self):
         maze1 = Maze()
-        maze1.add_tile((0,0), penomazefiles.tiles.Tile.Straight(0))
-        maze1.add_tile((1,0), penomazefiles.tiles.Tile.Corner(1))
-        maze1.add_tile((0,1), penomazefiles.tiles.Tile.T(2))
-        maze1.add_tile((1,1), penomazefiles.tiles.Tile.Closed())
+        maze1.add_tile((0,0), tiles.Straight(0))
+        maze1.add_tile((1,0), tiles.Corner(1))
+        maze1.add_tile((0,1), tiles.T(2))
+        maze1.add_tile((1,1), tiles.Closed())
 
         maze2 = Maze()
-        maze2.add_tile((0,0), penomazefiles.tiles.Tile.Straight(0))
-        maze2.add_tile((1,0), penomazefiles.tiles.Tile.Corner(1))
-        maze2.add_tile((0,1), penomazefiles.tiles.Tile.T(2))
-        maze2.add_tile((1,1), penomazefiles.tiles.Tile.Closed())
+        maze2.add_tile((0,0), tiles.Straight(0))
+        maze2.add_tile((1,0), tiles.Corner(1))
+        maze2.add_tile((0,1), tiles.T(2))
+        maze2.add_tile((1,1), tiles.Closed())
 
         self.assertEqual(maze1,maze2)
         self.assertTrue(maze1 == maze2)
@@ -50,16 +49,16 @@ class Test_Maze(unittest.TestCase):
 
     def test_inequality(self):
         maze1 = Maze()
-        maze1.add_tile((0,0), penomazefiles.tiles.Tile.Straight(0))
-        maze1.add_tile((1,0), penomazefiles.tiles.Tile.Corner(1))
-        maze1.add_tile((0,1), penomazefiles.tiles.Tile.T(2))
-        maze1.add_tile((1,1), penomazefiles.tiles.Tile.Closed())
+        maze1.add_tile((0,0), tiles.Straight(0))
+        maze1.add_tile((1,0), tiles.Corner(1))
+        maze1.add_tile((0,1), tiles.T(2))
+        maze1.add_tile((1,1), tiles.Closed())
 
         maze2 = Maze()
-        maze2.add_tile((0,0), penomazefiles.tiles.Tile.Straight(0))
-        maze2.add_tile((1,0), penomazefiles.tiles.Tile.Corner(1))
-        maze2.add_tile((0,1), penomazefiles.tiles.Tile.T(3))
-        maze2.add_tile((1,1), penomazefiles.tiles.Tile.Closed())
+        maze2.add_tile((0,0), tiles.Straight(0))
+        maze2.add_tile((1,0), tiles.Corner(1))
+        maze2.add_tile((0,1), tiles.T(3))
+        maze2.add_tile((1,1), tiles.Closed())
 
         self.assertTrue(maze1 != maze2)
         self.assertNotEqual(maze1, maze2)
@@ -67,10 +66,10 @@ class Test_Maze(unittest.TestCase):
 
     def test_get_boundingbox(self):
         maze1 = Maze()
-        maze1.add_tile((0,0), penomazefiles.tiles.Tile.Straight(0))
-        maze1.add_tile((1,0), penomazefiles.tiles.Tile.Corner(1))
-        maze1.add_tile((0,1), penomazefiles.tiles.Tile.T(2))
-        maze1.add_tile((1,1), penomazefiles.tiles.Tile.Closed())
+        maze1.add_tile((0,0), tiles.Straight(0))
+        maze1.add_tile((1,0), tiles.Corner(1))
+        maze1.add_tile((0,1), tiles.T(2))
+        maze1.add_tile((1,1), tiles.Closed())
 
         self.assertEqual(maze1.get_boundingbox(), ((0,0),(2,2)))
 
@@ -78,8 +77,8 @@ class Test_AsciiArtRenderer(unittest.TestCase):
     
     def test_description(self):
         maze = Maze()
-        maze.add_tile((1,1), Tile.Corner())
-        maze.add_tile((2,1), Tile.Corner(1))
+        maze.add_tile((1,1), tiles.Corner())
+        maze.add_tile((2,1), tiles.Corner(1))
 
         true_stream = """+-------++-------+
 |                |

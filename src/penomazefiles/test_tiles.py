@@ -1,5 +1,5 @@
 '''
-File: test_tile.py
+File: test_tiles.py
 Author: Me
 Description: 
 
@@ -10,7 +10,7 @@ a module in the tiles package
 
 
 import unittest
-from .Tile import *
+from .tiles import *
 
 
 class Test_Tile(unittest.TestCase):

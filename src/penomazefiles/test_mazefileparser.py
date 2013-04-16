@@ -1,6 +1,10 @@
 import unittest
-from .mazefileparser import *
-import penomazefiles
+from .mazefileparser import MazeFileBuilder
+from .mazefileparser import MazeFileTokenizer
+from .mazefileparser import MazeFileParser
+from .mazefileparser import SpecificationViolationError
+from . import Maze
+from . import tiles
 
 class Test_MazeFileTokenizer(unittest.TestCase):
     
@@ -157,11 +161,11 @@ class Test_MazeFileBuilder(unittest.TestCase):
                   'T.S    Closed.W' ]
 
         # the true maze object
-        self.true_maze = penomazefiles.Maze.Maze()
-        self.true_maze.add_tile((0,0), penomazefiles.tiles.Tile.Straight(0))
-        self.true_maze.add_tile((1,0), penomazefiles.tiles.Tile.Corner(1))
-        self.true_maze.add_tile((0,1), penomazefiles.tiles.Tile.T(2))
-        self.true_maze.add_tile((1,1), penomazefiles.tiles.Tile.Closed(3))
+        self.true_maze = Maze.Maze()
+        self.true_maze.add_tile((0,0), tiles.Straight(0))
+        self.true_maze.add_tile((1,0), tiles.Corner(1))
+        self.true_maze.add_tile((0,1), tiles.T(2))
+        self.true_maze.add_tile((1,1), tiles.Closed(3))
 
     def tearDown(self):
         self.input_linelist = None
