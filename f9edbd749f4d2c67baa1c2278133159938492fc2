@@ -1,0 +1,5 @@
+new Branch: projectRestructuring
+
+move the penomazefiles.tiles.Tile module to penomazefiles.tiles
+I.e. instead of having a subpackage named tiles with only one module in it we
+now have a single module named tiles
