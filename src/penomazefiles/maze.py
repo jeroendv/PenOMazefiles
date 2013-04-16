@@ -76,7 +76,7 @@ class Maze(object):
         left upper point of the bounding box while rl is the coordinate of the
         right lower point of the bounding box
         """
-        tile_iterator = iter(self._maze.items())
+        tile_iterator = iter(self)
         value = next(tile_iterator)
         if value[1] is not None:
             min_x = value[0][0]
@@ -106,7 +106,12 @@ class Maze(object):
     def __ne__(self,other):
         return not self.__eq__(other)
 
-
+    def __iter__(self):
+        """return an Iterator for a maze object
+        
+        The iterator traverses the maze object returning all (coordinate, tile) tuples.
+        """
+        return iter(self._maze.items())
 
 class AsciiArtRenderer(object):
     """docstring for AsciiArtMaze"""
