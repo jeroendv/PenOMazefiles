@@ -45,8 +45,6 @@ class Maze(object):
     associated with one tile.
 
     """
-    _maze = {}
-
     def __init__(self):
         super(Maze, self).__init__()
         self._maze = {}
