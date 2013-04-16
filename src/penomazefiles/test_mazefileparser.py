@@ -3,7 +3,7 @@ from .mazefileparser import MazeFileBuilder
 from .mazefileparser import MazeFileTokenizer
 from .mazefileparser import MazeFileParser
 from .mazefileparser import SpecificationViolationError
-from . import Maze
+from . import maze
 from . import tiles
 
 class Test_MazeFileTokenizer(unittest.TestCase):
@@ -161,7 +161,7 @@ class Test_MazeFileBuilder(unittest.TestCase):
                   'T.S    Closed.W' ]
 
         # the true maze object
-        self.true_maze = Maze.Maze()
+        self.true_maze = maze.Maze()
         self.true_maze.add_tile((0,0), tiles.Straight(0))
         self.true_maze.add_tile((1,0), tiles.Corner(1))
         self.true_maze.add_tile((0,1), tiles.T(2))

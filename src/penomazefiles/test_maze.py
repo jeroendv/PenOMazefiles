@@ -1,6 +1,7 @@
 import unittest
-from .Maze  import *
-from penomazefiles import tiles
+from .maze  import *
+
+from . import tiles
 import io
 
 class Test_Maze(unittest.TestCase):

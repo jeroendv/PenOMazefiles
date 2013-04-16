@@ -14,6 +14,7 @@ the presence of an object.
 
 see Toledo for specifications of mazefiles
 '''
+from .maze import Maze
 import copy
 
 def MazeFileBuilder(stream):
@@ -264,7 +265,6 @@ class MazeTokenParser(object):
 
     def __init__(self):
         """docstring for # TODO: write """
-        from .Maze import Maze
         self._maze= Maze()
 
 
