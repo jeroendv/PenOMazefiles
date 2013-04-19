@@ -1,11 +1,11 @@
 
-# fixed version of the mazefile found at
+# partially fixed version of the mazefile found at
 #
 #   src/testmazes/demo2.orig.maze
-
-# fixes:
-#  + width is 8 not zero
-#  + s/Seasaw/Seesaw/g
+#
+# It fixes a number of syntax problems in the mazefile:
+#  + width should be 8 not zero
+#  + wrong tile string representateion: s/Seasaw/Seesaw/g
 #  + 'n' is invalid orientation, use 'N' instead
 
 10 8

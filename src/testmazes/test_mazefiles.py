@@ -1,6 +1,7 @@
 import unittest
 from penomazefiles.mazefileparser import MazeFileBuilder
 from penomazefiles.mazefileparser import SpecificationViolationError
+from penomazefiles.maze import are_walls_consistent
 
 class TestMazeFiles(unittest.TestCase):
     """
@@ -30,9 +31,13 @@ class TestMazeFiles(unittest.TestCase):
             src/testmazes/demo2.fixed.maze
         """
         try:
-            MazeFileBuilder(open('testmazes/demo2.fixed.maze','r'))
+            maze = MazeFileBuilder(open('testmazes/demo2.fixed.maze','r'))
         except SpecificationViolationError:
             self.fail('Valid mazefile, yet a SpecificationViolationError is still raised')
+        else:
+            self.assertFalse(are_walls_consistent(maze))
+
+        
 
     def test_demo2_bronze(self):
         """
@@ -46,6 +51,23 @@ class TestMazeFiles(unittest.TestCase):
         """
         with self.assertRaises(SpecificationViolationError):
             MazeFileBuilder(open('testmazes/demo2.brons.maze','r'))
+
+
+    def test_demo2_consistent(self):
+        """
+            check that 
+
+                src/testmazes/demo2.consistent.maze
+
+            can be parsed and that it walls are consistent
+        """
+        try:
+            maze = MazeFileBuilder(open('testmazes/demo2.consistent.maze','r'))
+        except SpecificationViolationError:
+            self.fail('Valid mazefile, yet a SpecificationViolationError is still raised')
+        else:
+            self.assertTrue(are_walls_consistent(maze))
+        
 
 
 
