@@ -1,8 +1,13 @@
 #ignore python cache files
 __pycache__/
 
+# ignore the main.py module
+# I only use it for some random testing, debugging, experimentation
+/src/main.py
+
 #ignore compiled python files
 *.pyc
 
 #ignore the ctags database file
 /tags
+
