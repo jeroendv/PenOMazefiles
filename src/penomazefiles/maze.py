@@ -86,6 +86,7 @@ class Maze(object):
         max_y = min_y + 1
 
         for (coordinate,tile) in tile_iterator:
+
             if coordinate[0] < min_x:
                 min_x = coordinate[0]
             if coordinate[0]+1> max_x:
@@ -108,9 +109,9 @@ class Maze(object):
         return not self.__eq__(other)
 
     def __iter__(self):
-        """return an Iterator for a maze object
+        """return an Iterator for this maze object
         
-        The iterator traverses the maze object returning all (coordinate, tile) tuples.
+        The iterator traverses the maze object returning (coordinate, tile) tuples.
         """
         return iter(self._maze.items())
 
