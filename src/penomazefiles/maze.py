@@ -173,3 +173,66 @@ def are_walls_consistent(maze):
 
     # all tiles are consistent
     return True
+
+class RotatedMaze(Maze):
+    """A rotated Maze
+
+    A given  maze can be rotated clockwise over a multiple of 90 degrees 
+    
+    """
+
+    def __init__(self, maze,nb_of_rotations = 0):
+        """
+        Construct a rotated maze by rotating a given maze a number of times.
+        """
+        super().__init__()
+        self._unrotated_maze = maze
+        self.nb_of_rotations = nb_of_rotations
+        
+
+    def add_tile(self,coordinate, tile):
+        # TODO: write code...
+        pass
+
+    def get_boundingbox(self):
+        """h"""
+        (lu_unrotated, rl_unrotated) = self._unrotated_maze.get_boundingbox()
+        ll_unrotated = (lu_unrotated[0], rl_unrotated[1])
+        ru_unrotated = (rl_unrotated[0], lu_unrotated[1])
+        lu_rotated = self._rotate(ll_unrotated)
+        rl_rotated = self._rotate(ru_unrotated)
+
+        return (lu_rotated, rl_rotated)
+
+    def __eq__(self,other):
+        # TODO: write code...
+        pass
+
+    def __ne__(self,other):
+        # TODO: write code...
+        pass
+
+    def get_tile(self,coordinate):
+        return self._unrotated_maze.get_tile(self._unrotate(coordinate))
+
+    def __iter__(self):
+        # TODO: write code...
+        pass
+
+    def _rotate(self,coordinate):
+        x = coordinate[0]
+        y = coordinate[1]
+        rotated_x = -y
+        rotated_y = x
+
+        return(rotated_x, rotated_y)
+
+    def _unrotate(self,coordinate):
+        x = coordinate[0]
+        y = coordinate[1]
+        unrotated_x = y
+        unrotated_y = -x
+
+        return(unrotated_x, unrotated_y)
+
+

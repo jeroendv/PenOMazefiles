@@ -95,3 +95,46 @@ class Test_AsciiArtRenderer(unittest.TestCase):
 
         stream.close()
         
+class Test_RotatedMaze(unittest.TestCase):
+    
+    def setUp(self):
+        """docstring for setUp"""
+        # TODO: write code...
+        self.unrotated_maze = Maze()
+        self.unrotated_maze.add_tile((1,1), tiles.DeadEnd(3))
+        self.unrotated_maze.add_tile((2,1), tiles.DeadEnd(1))
+        self.unrotated_ascii_art = '''+-------++-------+
+|                |
+|                |
+|                |
++-------++-------+
+'''
+
+        self.rotated_maze =  Maze()
+        self.rotated_maze.add_tile((-2,1), tiles.DeadEnd(0))
+        self.rotated_maze.add_tile((-2,2), tiles.DeadEnd(2))
+
+        self.rotated_ascii_art = '''+-------+
+|       |
+|       |
+|       |
++       +
++       +
+|       |
+|       |
+|       |
++-------+
+'''
+
+
+    def tearDown(self):
+        self.unrotated_maze = None
+        self.rotated_maze = None
+
+
+    def test_get_boundingbox(self):
+        self.assertEqual(self.unrotated_maze.get_boundingbox(), ((1,1),(3,2)))
+        self.assertEqual(self.rotated_maze.get_boundingbox(), ((-2,1),(-1,3)))
+        self.assertEqual(RotatedMaze(self.unrotated_maze).get_boundingbox(), ((-2,1),(-1,3)))
+
+
